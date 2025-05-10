@@ -89,6 +89,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 sx={{ flexGrow: 1 }}
             >
                 <CardContent>
+                    <Box
+                        component="img"
+                        src={`https://yavuzceliker.github.io/sample-images/image-${
+                            Math.abs(
+                                product._id
+                                    .split("")
+                                    .reduce(
+                                        (acc, char) => acc + char.charCodeAt(0),
+                                        0
+                                    ) % 700
+                            ) + 1
+                        }.jpg`}
+                        alt={product.name}
+                        sx={{
+                            width: "100%",
+                            height: "200px",
+                            objectFit: "cover",
+                        }}
+                    />
                     <Typography
                         gutterBottom
                         variant="h6"

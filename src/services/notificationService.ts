@@ -61,7 +61,7 @@ export const markAllNotificationsAsRead = async (): Promise<{
         success: boolean;
         message: string;
         modifiedCount: number;
-    }>("/notifications/markAllRead", {});
+    }>("/notifications/read-all", {});
     return response.data;
 };
 

@@ -50,11 +50,21 @@ const ProductDetail: React.FC = () => {
                     <Grid item xs={12} md={6}>
                         <Box
                             component="img"
-                            src={product.image}
+                            src={`https://yavuzceliker.github.io/sample-images/image-${
+                                Math.abs(
+                                    product._id
+                                        .split("")
+                                        .reduce(
+                                            (acc, char) =>
+                                                acc + char.charCodeAt(0),
+                                            0
+                                        ) % 700
+                                ) + 1
+                            }.jpg`}
                             alt={product.name}
                             sx={{
                                 width: "100%",
-                                height: "auto",
+                                height: "400px",
                                 objectFit: "cover",
                             }}
                         />

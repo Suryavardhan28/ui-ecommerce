@@ -152,43 +152,6 @@ npm test
 npm run lint
 ```
 
-## Deployment
-
-### Docker Deployment
-
-1. **Build the Image**
-
-    ```bash
-    docker build -t ecommerce-ui:1.0 .
-    ```
-
-2. **Run the Container**
-    ```bash
-    docker run -p 80:80 \
-      -e VITE_API_URL=http://api.example.com \
-      -e VITE_WS_URL=ws://api.example.com \
-      ecommerce-ui:1.0
-    ```
-
-### Kubernetes Deployment
-
-1. **Create Namespace**
-
-    ```bash
-    kubectl create namespace ecommerce
-    ```
-
-2. **Apply Kubernetes Manifests**
-
-    ```bash
-    kubectl apply -f kubernetes/
-    ```
-
-3. **Verify Deployment**
-    ```bash
-    kubectl get all -n ecommerce -l app=ecommerce-ui
-    ```
-
 ## Monitoring
 
 -   Error tracking
@@ -217,20 +180,3 @@ npm run lint
     - Check browser console
     - Monitor network requests
     - Verify bundle size
-
-### Debug Commands
-
-```bash
-# Check pod status
-kubectl get pods -n ecommerce -l app=ecommerce-ui
-
-# Check service logs
-kubectl logs -f deployment/ecommerce-ui -n ecommerce
-
-# Check service health
-curl http://localhost:80/health
-```
-
-## License
-
-MIT License

@@ -1,6 +1,10 @@
 # Build stage
 FROM node:18-alpine as build
 
+# Should be enabled for kubernetes deployment
+# ARG VITE_API_URL
+# ENV VITE_API_URL=${VITE_API_URL:-/api}
+
 # Create app directory
 WORKDIR /usr/src/app
 

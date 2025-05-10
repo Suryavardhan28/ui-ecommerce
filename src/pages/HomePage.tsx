@@ -91,7 +91,7 @@ const HomePage: React.FC = () => {
                 </Typography>
 
                 <Grid container spacing={3}>
-                    {["Electronics", "Clothing", "Home & Kitchen", "Books"].map(
+                    {["Electronics", "Clothing", "Home", "Books"].map(
                         (category) => (
                             <Grid item xs={12} sm={6} md={3} key={category}>
                                 <Card
@@ -108,7 +108,7 @@ const HomePage: React.FC = () => {
                                     }}
                                     onClick={() =>
                                         navigate(
-                                            `/products?category=${category}`
+                                            `/products?category=${category.toLowerCase()}`
                                         )
                                     }
                                 >

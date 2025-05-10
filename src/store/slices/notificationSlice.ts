@@ -55,6 +55,20 @@ export const markAsRead = createAsyncThunk(
     }
 );
 
+export const markAllNotificationsAsRead = createAsyncThunk(
+    "notifications/markAllNotificationsAsRead",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.put("/notifications/read-all");
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(
+                error.response?.data?.message ||
+                    "Failed to mark all notifications as read"
+            );
+        }
+    }
+);
 export const getUnreadCount = createAsyncThunk(
     "notifications/getUnreadCount",
     async (_, { rejectWithValue }) => {
@@ -101,6 +115,12 @@ const notificationSlice = createSlice({
             })
             .addCase(getUnreadCount.fulfilled, (state, action) => {
                 state.unreadCount = action.payload;
+            })
+            .addCase(markAllNotificationsAsRead.fulfilled, (state, action) => {
+                state.notifications.forEach((notification) => {
+                    notification.read = true;
+                });
+                state.unreadCount = 0;
             });
     },
 });

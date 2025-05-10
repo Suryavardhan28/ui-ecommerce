@@ -17,6 +17,7 @@ import {
     ListItem,
     ListItemText,
     Popover,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
@@ -24,6 +25,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     fetchNotifications,
+    markAllNotificationsAsRead,
     markAsRead,
 } from "../store/slices/notificationSlice";
 import { AppDispatch, RootState } from "../store/store";
@@ -59,6 +61,10 @@ const Notifications: React.FC = () => {
 
     const handleRefresh = () => {
         dispatch(fetchNotifications());
+    };
+
+    const handleMarkAllAsRead = async () => {
+        await dispatch(markAllNotificationsAsRead());
     };
 
     useEffect(() => {
@@ -123,9 +129,19 @@ const Notifications: React.FC = () => {
                 <Box sx={{ p: 2 }}>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                         <Typography variant="h6">Notifications</Typography>
-                        <IconButton onClick={handleRefresh}>
-                            <RefreshIcon />
-                        </IconButton>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Tooltip title="Refresh">
+                            <IconButton onClick={handleRefresh}>
+                                <RefreshIcon />
+                            </IconButton>
+                        </Tooltip>
+                        {unreadCount > 0 && (
+                            <Tooltip title="Mark all as read">
+                                <IconButton onClick={handleMarkAllAsRead}>
+                                    <CheckCircleIcon />
+                                </IconButton>
+                            </Tooltip>
+                        )}
                     </Box>
                     <Divider sx={{ my: 1 }} />
                     {loading ? (
